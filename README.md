@@ -1,4 +1,4 @@
-# Custom Auth User Model Pet Project Tutorial
+# Simple Student Inquiry Project with custom Auth User Model
 
 For user authentication purposes using email and password credentials
 
@@ -13,4 +13,3 @@ For user authentication purposes using email and password credentials
 - Run the server (py manage.py runserver)
 - Create your app with (py manage.py startapp my_user_model)
 - Register your app inside settings.py (INSTALLED_APPS)
-- 
