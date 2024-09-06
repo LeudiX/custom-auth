@@ -18,15 +18,14 @@ def register(request):
                 user.set_password(password1)
                 user.save()
 
-                messages.success(request,f'Your account has been succesfully created {username}!
-                                 Proceed to Log In')
+                messages.success(request,f'Your account has been succesfully created {username}! Proceed to Log In')
                 return redirect('login') #Redirect to the login page
             else:
                 #Handling password mismatch error
                 form.add_error('password2','Passwords entered do not match.Try again')
-        else:
-            form = RegistrationForm()
-        return render(request,'users/register.html',{'form':form})
+    else:
+        form = RegistrationForm()
+    return render(request,'users/register.html',{'form':form})
     
 def base(request):
     return render(request,"users/base.html")

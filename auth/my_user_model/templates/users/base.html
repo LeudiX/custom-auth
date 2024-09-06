@@ -61,8 +61,10 @@
                     <!--Go to admin..-list view-->
                     <a
                       class="dropdown-item"
+                      {% comment "" %}
                       href="{% url 'administrativerequests-list' %}"
-                      >View</a
+                      {% endcomment %} 
+                    >View</a
                     >
                   </li>
 
@@ -72,7 +74,9 @@
                     <!--Go to create view-->
                     <a
                       class="dropdown-item"
+                      {% comment "" %}
                       href="{% url 'administrativerequests-create' %}"
+                      {% endcomment %}
                       >Add</a
                     >
                   </li>
@@ -94,7 +98,9 @@
                     <!--Handling access to  academ..-list view-->
                     <a
                       class="dropdown-item"
-                      href="{% url 'academicrequests-list' %}"
+                      {% comment "" %}
+                       href="{% url 'academicrequests-list' %}"
+                      {% endcomment %}
                       >View</a
                     >
                   </li>
@@ -104,7 +110,9 @@
                     <!--Go to create view-->
                     <a
                       class="dropdown-item"
+                      {% comment "" %}
                       href="{% url 'academicrequests-create' %}"
+                      {% endcomment %}
                       >Add</a
                     >
                   </li>
@@ -113,8 +121,13 @@
               </li>
 
               <li class="nav-item" style="margin-right: 50px">
-                <!--Got to logout view-->
-                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                <!--Got to logout view -->
+                <!--Updated since Django doesn't allow this operation
+                be handled by a GET Method (Security Issues)-->
+                <form method="post" action="{% url 'logout' %}">
+                  {% csrf_token %}
+                  <button class="btn btn-dark" type="submit">Log Out</button>
+                </form>
               </li>
               {% endif %}
             </ul>

@@ -1,43 +1,47 @@
-{% extends "users/base.html" %}
-{% block content %}
-    <div class="container  mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <div class="card">
-                    <div class="card-body">
-                        <!--authorization-->
-                        {% if user.is_student %}
-                        <h3 class="card-title">Welcome to the Student's home page</h3>
-                        <p class="card-text">
-                            Where your inquiries are heard.Proceed to the Administrative Requests
-                            or Academic Requests Tab to inquire!
-                        </p>
-                        <!--authorization-->
-                        {% elif user.is_facilitator %}
-                        <h3 class="card-title">Welcome to the Facilitators's home page</h3>
-                        <p class="card-text">
-                            We bring you closer to the student's worries.
-                            To proceed, check the Academic Requests Tab(view) to
-                            see the requests made by your students.
-                            You can either choose to 'respond' or 'delete' them    
-                        </p>
-                        <!--authorization-->
-                        {% elif user.is_teamlead %}
-                        <h3 class="card-title">Welcome to the Team Lead Page</h3>
-                        <p class="card-text">As a team Lead, you will be able to view
-                           all Academic Requests and Administrative Requests. You will
-                           be able to respond to the Administrative Tasks 
-                        </p>
-                        {% else %}
-                        <h3 class="card-title">Welcome to the Inquiry Application</h3>
-                        <p class="card-text">Proceed to Log-In tab if you already have 
-                            an account. Else, Proceed to the Sign-Up tab.
-                        </p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+{% extends "users/base.html" %} {% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <div class="card">
+        <div class="card-body">
+          <!--authorization-->
+          {% if user.is_student %}
+          <h3 class="card-title">
+            Welcome to the Student's home page {{user.username}}
+            <br />
+            Role: {{user.user_type}}
+          </h3>
+          <p class="card-text">
+            Where your inquiries are heard.Proceed to the Administrative
+            Requests or Academic Requests Tab to inquire!
+          </p>
+          <!--authorization-->
+          {% elif user.is_facilitator %}
+          <h3 class="card-title">Welcome to the Facilitators's home page</h3>
+          <p class="card-text">
+            We bring you closer to the student's worries. To proceed, check the
+            Academic Requests Tab(view) to see the requests made by your
+            students. You can either choose to 'respond' or 'delete' them
+          </p>
+          <!--authorization-->
+          {% elif user.is_teamlead %}
+          <h3 class="card-title">Welcome to the Team Lead Page</h3>
+          <p class="card-text">
+            As a team Lead, you will be able to view all Academic Requests and
+            Administrative Requests. You will be able to respond to the
+            Administrative Tasks
+          </p>
+          {% else %}
+          <h3 class="card-title">Welcome to the Inquiry Application</h3>
+          <p class="card-text">
+            Proceed to Log-In tab if you already have an account. Else, Proceed
+            to the Sign-Up tab.
+          </p>
+          {% endif %}
         </div>
+      </div>
     </div>
+  </div>
+</div>
 
-{% endblock  %}
+{% endblock %}
