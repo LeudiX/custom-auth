@@ -2,7 +2,10 @@
 <div class="container">
   <h2>Register</h2>
   <form method="post">
-    {%csrf_token%} {{form|crispy}}
+    <!--Avoid or mitigate CSRF attacks-->
+    {% csrf_token %} 
+    <!--crispy forms styles instance-->
+    {{form|crispy}}
     <div>
       <strong>Password Strength:</strong>
       <div id="password-strength">Please, enter a password.</div>

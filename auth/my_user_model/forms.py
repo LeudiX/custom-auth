@@ -15,7 +15,7 @@ class RegistrationForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={'class':'form-control'}),
     )
 
-    #Adding and addditional field for password strength
+    #Adding and addditional field for password strength checking
     password_strength = forms.CharField(
         widget=forms.HiddenInput(),
         required=False,
