@@ -3,29 +3,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <!--Bootstrap CSS-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>
       {%if title %} <!--context var--> {{title}} {%else%} Student Inquiry
       Application {%endif%}
     </title>
   </head>
+
   <body>
     <div class="wrapper">
+
       <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+          
+          <div class="container-fluid col-md-6">
             <div class="navbar-header">
               <button
                 type="button"
                 class="navbar-toggler"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
@@ -39,116 +40,120 @@
               </a>
             </div>
           </div>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" style="margin-right: 50px">
-                <!--Handling access to home view-->
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
-              </li>
-              {% if user.is_authenticated %}
-              <!-- Display tabs for authenticated users -->
-              <li style="margin-right: 50px; margin-top: 8px">
-                <a
-                  href="#adminsrequestsSubmenu"
-                  data-toggle="collapse"
-                  aria-expanded="false"
-                  class="dropdown-toggle"
-                  style="color: gray"
-                  >Administrative Requests</a
-                >
-                <ul class="collapse list-unstyled" id="adminsrequestsSubmenu">
-                  <li>
-                    <!--Go to admin..-list view-->
-                    <a
-                      class="dropdown-item"
-                      {% comment "" %}
-                      href="{% url 'administrativerequests-list' %}"
-                      {% endcomment %} 
-                    >View</a
-                    >
-                  </li>
 
-                  <!--Handling authorization with Django-->
-                  {% if user.is_student or user.is_teamlead %}
-                  <li>
-                    <!--Go to create view-->
-                    <a
-                      class="dropdown-item"
-                      {% comment "" %}
-                      href="{% url 'administrativerequests-create' %}"
-                      {% endcomment %}
-                      >Add</a
-                    >
-                  </li>
-                  {% endif %}
-                </ul>
-              </li>
-
-              <li style="margin-right: 50px; margin-top: 8px">
-                <a
-                  href="#academicrequestsSubmenu"
-                  data-toggle="collapse"
-                  aria-expanded="false"
-                  class="dropdown-toggle"
-                  style="color: gray"
-                  >Academic Requests</a
-                >
-                <ul class="collapse list-unstyled" id="academicrequestsSubmenu">
-                  <li>
-                    <!--Handling access to  academ..-list view-->
-                    <a
-                      class="dropdown-item"
-                      {% comment "" %}
-                       href="{% url 'academicrequests-list' %}"
-                      {% endcomment %}
+          <div class="collapse navbar-collapse cold-md-6 justify-content-end px-2" id="navbarSupportedContent">
+              <ul class="nav navbar-nav nav-fill">
+                <!--Home-->
+                <li class="nav-item">
+                  <!--Handling access to home view-->
+                  <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <!-- Admin Resquest Dropdown -->
+                <li class="nav-item dropdown">
+                  <a
+                    class=" nav-link dropdown-toggle"
+                    href="#adminsrequestsSubmenu"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close = "true"
+                    aria-expanded="false"
+                    style="color: gray;"
+                    >Administrative Requests</a
+                  >
+                  <ul class="dropdown-menu" id="adminsrequestsSubmenu">
+                    <li>
+                      <!--Go to admin..-list view-->
+                      <a
+                        class="dropdown-item"
+                        {% comment "" %}
+                        href="{% url 'administrativerequests-list' %}"
+                        {% endcomment %} 
                       >View</a
-                    >
-                  </li>
-                  <!--Handling authorization with Django-->
-                  {% if user.is_student %}
-                  <li>
-                    <!--Go to create view-->
-                    <a
-                      class="dropdown-item"
-                      {% comment "" %}
-                      href="{% url 'academicrequests-create' %}"
-                      {% endcomment %}
-                      >Add</a
-                    >
-                  </li>
-                  {% endif %}
-                </ul>
-              </li>
-
-              <li class="nav-item" style="margin-right: 50px">
-                <!--Got to logout view -->
-                <!--Updated since Django doesn't allow this operation
-                be handled by a GET Method (Security Issues)-->
-                <form method="post" action="{% url 'logout' %}">
-                  {% csrf_token %}
-                  <button class="btn btn-dark" type="submit">Log Out</button>
-                </form>
-              </li>
+                      >
+                    </li>
+  
+                    <!--Handling authorization with Django-->
+                    {% if user.is_student or user.is_teamlead %}
+                    <li>
+                      <!--Go to create view-->
+                      <a
+                        class="dropdown-item"
+                        {% comment "" %}
+                        href="{% url 'administrativerequests-create' %}"
+                        {% endcomment %}
+                        >Add</a
+                      >
+                    </li>
+                    {% endif %}
+                  </ul>
+                </li>
+                <!--Academic Request Dropdown-->
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#academicrequestsSubmenu"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close = "true"
+                    aria-expanded="false"
+                    style="color: gray"
+                    >Academic Requests</a
+                  >
+                  <ul class="dropdown-menu" id="academicrequestsSubmenu">
+                    <li>
+                      <!--Handling access to  academ..-list view-->
+                      <a
+                        class="dropdown-item"
+                        {% comment "" %}
+                         href="{% url 'academicrequests-list' %}"
+                        {% endcomment %}
+                        >View</a
+                      >
+                    </li>
+                    <!--Handling authorization with Django-->
+                    {% if user.is_student %}
+                    <li>
+                      <!--Go to create view-->
+                      <a
+                        class="dropdown-item"
+                        {% comment "" %}
+                        href="{% url 'academicrequests-create' %}"
+                        {% endcomment %}
+                        >Add</a
+                      >
+                    </li>
+                    {% endif %}
+                  </ul>
+                </li>
+                 <!--Logout -->
+                <li>
+                  <!--Updated since Django doesn't allow this operation
+                  be handled by a GET Method (Security Issues)-->
+                  <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-dark" style="color: gray" type="submit">Log Out</button>
+                  </form>
+                </li>
+                {% endif %}
+              </ul>
+              <!--Handling authorization with Django-->
+              {% if not user.is_authenticated %}
+              <ul class="nav navbar-nav nav-fill">
+                <li class="nav-item">
+                  <!--Go to login view-->
+                  <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                  <!--Go to registration view-->
+                  <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                </li>
+              </ul>
               {% endif %}
-            </ul>
-            <!--Handling authorization with Django-->
-            {% if not user.is_authenticated %}
-            <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" style="margin-right: 50px">
-                <!--Go to login view-->
-                <a class="nav-link" href="{% url 'login' %}">Log In</a>
-              </li>
-              <li class="nav-item" style="margin-right: 50px">
-                <!--Go to registration view-->
-                <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
-              </li>
-            </ul>
-            {% endif %}
           </div>
         </nav>
+
         <main role="main" class="container">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 my-3">
               <!--Custom logic for messages-->
               {% if messages %} {% for message in messages %}
               <div class="alert alert-{{ message.tags }}">
@@ -159,7 +164,8 @@
             </div>
           </div>
         </main>
-        <footer class="footer mt-5 py-3 bg-light">
+
+        <footer class="footer mt-4 py-3 bg-dark fixed-bottom">
           <div class="container text-center">
             <span class="text-muted">
               Special thanks to
@@ -170,6 +176,7 @@
               >
             </span>
           </div>
+
         </footer>
       </div>
     </div>
@@ -178,15 +185,6 @@
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-      integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

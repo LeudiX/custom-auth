@@ -1,6 +1,6 @@
 {% extends "users/base.html" %} {% load crispy_forms_tags %} {% block content %}
-<div class="content-section">
-  <form method="POST">
+<div class="content-section my-3">
+  <form method="POST" autocomplete="off">
     <!--Avoid or mitigate CSRF attacks-->
     {% csrf_token %}
     <fieldset class="form-group">
