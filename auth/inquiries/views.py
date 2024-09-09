@@ -99,7 +99,7 @@ class AdmininstrativeRequestsListView(ListView):
 class AdministrativeRequestsDeleteView(DeleteView):
     
     model = AdministrativeRequests
-    template_name = 'inquiries/confirm-delete.html'
+    template_name = 'inquiries/confirm_delete.html'
 
     # reverse returns the string url path
     def get_success_url(self):
@@ -207,7 +207,7 @@ class AcademicRequestsListView(LoginRequiredMixin,ListView):
 class AcademicRequestsDeleteView(DeleteView):
     
     model = AcademicRequests
-    template_name = 'inquiries/confirm-delete.html'
+    template_name = 'inquiries/confirm_delete.html'
 
     # reverse returns the string url path
     def get_success_url(self):
@@ -215,7 +215,7 @@ class AcademicRequestsDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = 'Delete Academic Request' 
+        context['title'] = 'Delete Academic Request' 
         
         # Retrieves the subject of the academic request we want to delete
         academic_request_subject = AcademicRequests.objects.get(pk =self.kwargs.get('pk')).subject
