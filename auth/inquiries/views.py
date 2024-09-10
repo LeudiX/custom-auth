@@ -23,7 +23,7 @@ class AdministrativeRequestsCreateView(CreateView):
     
     # reverse returns the string url path
     def get_success_url(self) -> str:
-        return reverse_lazy('administrativerequests-list')
+        return reverse_lazy('admin-requests-list')
     
     """
     Adds a table title to the context by calling the Parent's class get.context_data
@@ -53,7 +53,7 @@ class AdministrativeRequestsUpdateView(UpdateView):
 
     # reverse returns the string url path   
     def get_success_url(self) -> str:
-        return reverse_lazy('administrativerequests-list')
+        return reverse_lazy('admin-requests-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -103,7 +103,7 @@ class AdministrativeRequestsDeleteView(DeleteView):
 
     # reverse returns the string url path
     def get_success_url(self):
-        return reverse_lazy('administrativerequests-list')
+        return reverse_lazy('admin-requests-list')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -111,10 +111,10 @@ class AdministrativeRequestsDeleteView(DeleteView):
         
         # Retrieves the subject of the administrativerequest we want to delete
         administration_request_subject = AdministrativeRequests.objects.get(pk = self.kwargs.get('pk')).subject
-        context['confirm-delete-message'] = f'Are you sure yo want to delete this Administrative Request:"{administration_request_subject}"?'
+        context['message'] = f'Are you sure yo want to delete this Administrative Request:  "{administration_request_subject}"?'
 
         # Display a cancel button on confirmation page and if pressed , return the user to the academicrequests list 
-        context['cancel-url'] = 'administrativerequests-list'
+        context['cancel_url'] = 'admin-requests-list'
         return context
         
 #-------------------------------------------------------------------------------------------------------------------------------        
@@ -133,7 +133,7 @@ class AcademicRequestsCreateView(CreateView):
     
     # reverse returns the string url path
     def get_success_url(self):
-        return reverse_lazy('academicrequests-list')
+        return reverse_lazy('academic-requests-list')
 
     # Adds a title to the context by calling the Parent's class get_context_data and extending it
     # Parent class in this case is CreateView
@@ -160,7 +160,7 @@ class AcademicRequestsUpdateView(UpdateView):
 
     # reverse returns the string url path
     def get_success_url(self):
-        return reverse_lazy('academicrequests-list')
+        return reverse_lazy('academic-requests-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -211,7 +211,7 @@ class AcademicRequestsDeleteView(DeleteView):
 
     # reverse returns the string url path
     def get_success_url(self):
-        return reverse_lazy('academicrequests-list')
+        return reverse_lazy('academic-requests-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -219,9 +219,9 @@ class AcademicRequestsDeleteView(DeleteView):
         
         # Retrieves the subject of the academic request we want to delete
         academic_request_subject = AcademicRequests.objects.get(pk =self.kwargs.get('pk')).subject
-        context['confirm-delete-message'] = f'Are you sure you want to delete this academic request: "{academic_request_subject}" ?'
+        context['message'] = f'Are you sure you want to delete this academic request: "{academic_request_subject}" ?'
         # Display a cancel button on confirmation page and if pressed, return user to the academic requests list
-        context['cancel_url'] = 'academicrequests-list'
+        context['cancel_url'] = 'academic-requests-list'
         return context
     
         

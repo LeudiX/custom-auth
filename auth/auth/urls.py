@@ -24,4 +24,5 @@ admin.site.index_title = 'Student Inquiry Application Admin'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('my_user_model.urls')),
+    path('',include('inquiries.urls')),
 ]
